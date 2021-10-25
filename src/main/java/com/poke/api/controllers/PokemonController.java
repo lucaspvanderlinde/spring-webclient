@@ -1,6 +1,5 @@
 package com.poke.api.controllers;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.poke.api.models.Pokemon;
+import com.poke.api.models.Results;
 import com.poke.api.services.PokemonService;
+
+import reactor.core.publisher.Flux;
 
 @Controller
 @RequestMapping("/pokemons")
@@ -21,9 +23,9 @@ public class PokemonController {
 	private PokemonService pokemonService;
 	
 	@GetMapping
-	public ResponseEntity<List<Pokemon>> buscarTodos() {
+	public ResponseEntity<Flux<Results>> buscarTodos() {
 		
-		List<Pokemon> listaPokemon = pokemonService.buscarTodos();
+		Flux<Results> listaPokemon = pokemonService.buscarTodos();
 		
 		return ResponseEntity.ok(listaPokemon);
 			
