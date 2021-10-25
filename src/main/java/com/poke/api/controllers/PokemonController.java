@@ -1,5 +1,6 @@
 package com.poke.api.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,15 @@ public class PokemonController {
 	
 	@Autowired
 	private PokemonService pokemonService;
+	
+	@GetMapping
+	public ResponseEntity<List<Pokemon>> buscarTodos() {
+		
+		List<Pokemon> listaPokemon = pokemonService.buscarTodos();
+		
+		return ResponseEntity.ok(listaPokemon);
+			
+	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Pokemon>> buscarPorId(@PathVariable Long id) {
